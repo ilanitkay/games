@@ -24,13 +24,14 @@
 
     .bridge-container {
       display: flex;
-      justify-content: space-between; 
+      justify-content: flex-end; 
       flex-direction: row-reverse;
       align-items: center;
       margin: 30px auto;
       width: 90%;
       max-width: 850px;
       position: relative;
+      gap: 20px;
     }
 
     .side {
@@ -38,11 +39,12 @@
       flex-direction: column;
       align-items: center;
       gap: 14px;
-      width: 30%;
+      width: 25%;
+      min-width: 230px;
     }
 
     .bridge {
-      width: 38%;
+      width: 50%;
       height: 120px;
       display: flex;
       justify-content: center;
@@ -89,6 +91,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      width: 200px;
     }
 
     .person.selected {
@@ -329,13 +332,13 @@
     
     .bridge-steps {
       position: absolute;
-      width: 100%;
+      width: 90%;
       height: 100%;
       top: 0;
-      left: 0;
+      left: 5%;
       display: flex;
       justify-content: space-between;
-      padding: 0 5%;
+      padding: 0;
     }
   </style>
 </head>
@@ -348,7 +351,7 @@
   - חייבים לשאת <strong style="color:#F9FD76;">פנס</strong> בכל חצייה<br>
   - הזמן נמדד לפי <strong style="color:#FF7CDC;">האיטי מביניהם</strong><br><br>
   <span style="color:#FFFFFF;"><strong>יעל:</strong> 8 דקות | <strong>דן:</strong> 3 דקות | <strong>מאיה:</strong> 12 דקות | <strong>רון:</strong> 5 דקות</span><br><br>
-  <span>עליך להעביר את ארבעת האנשים לצד השני של הגשר <strong style="color:#99EDC3;">בזמן הקצר ביותר והאפשרי</strong>.</span>
+  <span>עליך להעביר את ארבעת האנשים לצד השני של הגשר <strong style="color:#99EDC3;">בזמן הקצר ביותר!</strong></span>
 </div>
 
   <div class="bridge-container">
@@ -371,7 +374,7 @@
   <button id="move-btn" onclick="move()">העבר</button>
   <button id="start-btn" onclick="resetGame()">התחל</button>
 
-  <p style="font-size: 1.3em;">⏱️ זמן שחלף: <span id="time">0</span> דקות</p>
+  <p style="font-size: 1.3em;">⏱️ זמן שחלף: <span id="time">0</span> דק'</p>
   <div id="win"></div>
 
   <div id="history">
@@ -474,7 +477,7 @@
         div.appendChild(iconDiv);
         
         const textSpan = document.createElement("span");
-        textSpan.textContent = `${p} (${speeds[p]} דקות)`;
+        textSpan.textContent = `${p} (${speeds[p]} דק')`;
         div.appendChild(textSpan);
         
         div.onclick = () => toggleSelect(p, "start");
@@ -491,7 +494,7 @@
         div.appendChild(iconDiv);
         
         const textSpan = document.createElement("span");
-        textSpan.textContent = `${p} (${speeds[p]} דקות)`;
+        textSpan.textContent = `${p} (${speeds[p]} דק')`;
         div.appendChild(textSpan);
         
         div.onclick = () => toggleSelect(p, "end");
@@ -500,7 +503,7 @@
 
       moves.forEach((m, i) => {
         const li = document.createElement("li");
-        li.textContent = `מהלך ${i + 1}: ${m.people.join(" ו")} עברו ${m.direction === "end" ? "לנקודת הסיום" : "לנקודת ההתחלה"} (${m.time} דקות)`;
+        li.textContent = `מהלך ${i + 1}: ${m.people.join(" ו")} עברו ${m.direction === "end" ? "לנקודת הסיום" : "לנקודת ההתחלה"} (${m.time} דק')`;
         historyList.appendChild(li);
       });
 
@@ -512,8 +515,8 @@
         
         document.getElementById("win").innerHTML = 
           time === 30 
-          ? "🎉 כל הכבוד! הגעת לפתרון האופטימלי של 30 דקות!"
-          : `סיימת את המשחק ב-${time} דקות. נסה להגיע לפתרון האופטימלי של 30 דקות 💪`;
+          ? "🎉 כל הכבוד! הגעת לפתרון האופטימלי של 30 דק'!"
+          : `סיימת את המשחק ב-${time} דק'. נסה להגיע לפתרון האופטימלי של 30 דק' 💪`;
       }
     };
 
