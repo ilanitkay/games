@@ -17,24 +17,15 @@
     }
 
     h1 {
-      font-size: 2.4em;
+      font-size: 2.8em;
       color: #FF7CDC;
       margin-bottom: 20px;
     }
 
-    .instructions {
-      background-color: rgba(255, 255, 255, 0.08);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 750px;
-      margin: 0 auto 25px;
-      line-height: 1.8;
-      font-size: 1.2em;
-    }
-
     .bridge-container {
       display: flex;
-      justify-content: space-between; flex-direction: row-reverse;
+      justify-content: space-between; 
+      flex-direction: row-reverse;
       align-items: center;
       margin: 30px auto;
       width: 90%;
@@ -52,41 +43,77 @@
 
     .bridge {
       width: 38%;
-      height: 80px;
-      background: #FFFFFF;
-      border-radius: 8px;
+      height: 120px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      background-image: repeating-linear-gradient(
-        45deg,
-        #0A1F3F 0,
-        #0A1F3F 3px,
-        #FFFFFF 3px,
-        #FFFFFF 6px
-      );
+      background-color: #99EDC3;
+      border-radius: 10px 10px 30px 30px;
+      border: 4px solid #FFFFFF;
+      border-top: 12px solid #FFFFFF;
+      border-bottom: 8px solid #FFFFFF;
+      box-shadow: 0px 25px 15px -10px rgba(0,0,0,0.4);
+      transform: perspective(500px) rotateX(5deg);
+    }
+    
+    .bridge:before, .bridge:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 160%;
+      background-color: #FFFFFF;
+      top: -30%;
+      z-index: -1;
+    }
+    
+    .bridge:before {
+      left: -15px;
+      border-radius: 10px 0 0 10px;
+    }
+    
+    .bridge:after {
+      right: -15px;
+      border-radius: 0 10px 10px 0;
     }
 
     .person {
       background-color: #FFFFFF;
       color: #0A1F3F;
       border-radius: 10px;
-      padding: 10px 20px;
+      padding: 10px 15px 10px 10px;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1.2em;
       cursor: pointer;
       transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .person.selected {
       background-color: #FF7CDC;
       transform: translateY(-4px);
     }
+    
+    .person-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F9FD76;
+    }
+    
+    .person-icon.yael { background-color: #FF7CDC; }
+    .person-icon.dan { background-color: #99EDC3; }
+    .person-icon.maya { background-color: #F9FD76; }
+    .person-icon.ron { background-color: #0A1F3F; color: white; }
 
     button {
       font-family: 'Rubik', sans-serif;
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: bold;
       padding: 12px 24px;
       border-radius: 8px;
@@ -97,13 +124,28 @@
     }
 
     #start-btn {
-      background-color: #FFFFFF;
+      background-color: #F9FD76;
       color: #0A1F3F;
+      transition: background-color 0.3s;
+    }
+    
+    #start-btn:hover {
+      background-color: #FF7CDC;
     }
 
     #move-btn {
-      background-color: #99EDC3;
+      background-color: #FFFFFF;
       color: #0A1F3F;
+      transition: background-color 0.3s;
+    }
+    
+    #move-btn:active {
+      background-color: #99EDC3;
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      transform: none;
     }
 
     button:hover {
@@ -112,16 +154,48 @@
 
     .flashlight {
       position: absolute;
-      top: -15px;
-      width: 26px;
-      height: 26px;
+      top: -32px;
+      width: 24px;
+      height: 40px;
+      background-color: #444;
+      border-radius: 4px 4px 6px 6px;
+      z-index: 10;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      border: 1px solid #222;
+    }
+    
+    .flashlight:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 6px;
+      background-color: #888;
+      border-radius: 4px 4px 0 0;
+      border-bottom: 1px solid #222;
+    }
+    
+    .flashlight:after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 4px;
+      width: 16px;
+      height: 16px;
+      background-color: #F9FD76;
       border-radius: 50%;
-      background-color: #FFFFFF;
-      box-shadow: 0 0 12px #FFFFFF;
+      box-shadow: 0 0 15px 5px rgba(249, 253, 118, 0.8);
+      animation: lightbeam 1.2s infinite alternate;
+    }
+
+    @keyframes lightbeam {
+      0% { opacity: 1; box-shadow: 0 0 15px 5px rgba(249, 253, 118, 0.8); }
+      100% { opacity: 0.8; box-shadow: 0 0 8px 3px rgba(249, 253, 118, 0.5); }
     }
 
     #win {
-      font-size: 1.2em;
+      font-size: 1.3em;
       margin-top: 20px;
       color: #FFFFFF;
     }
@@ -133,7 +207,7 @@
       border-radius: 10px;
       max-width: 750px;
       margin-inline: auto;
-      font-size: 1.05em;
+      font-size: 1.15em;
       text-align: right;
     }
 
@@ -146,34 +220,150 @@
       padding-right: 18px;
     }
 
+    /* דמויות באנימציה */
+    .person-bridge {
+      position: absolute;
+      width: 20px;
+      height: 36px;
+      z-index: 10;
+      bottom: 40px;
+      transition: left 2s linear;
+    }
+
+    .person-bridge .head {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+      background-color: #F9D9B4;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.7em;
+    }
+
+    .person-bridge .body {
+      position: absolute;
+      top: 10px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background-color: #99EDC3;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .person-bridge.person2 .body {
+      background-color: #FF7CDC;
+    }
+
+    .person-bridge .legs {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 10px;
+    }
+
+    .person-bridge .leg-left,
+    .person-bridge .leg-right {
+      position: absolute;
+      bottom: 0;
+      width: 5px;
+      height: 10px;
+      background-color: #34495E;
+    }
+
+    .person-bridge .leg-left {
+      left: 2px;
+      animation: leg-anim-left 0.6s infinite alternate;
+    }
+
+    .person-bridge .leg-right {
+      right: 2px;
+      animation: leg-anim-right 0.6s infinite alternate;
+    }
+
+    @keyframes leg-anim-left {
+      0% { height: 10px; }
+      100% { height: 8px; }
+    }
+
+    @keyframes leg-anim-right {
+      0% { height: 8px; }
+      100% { height: 10px; }
+    }
+
+    .flashlight-anim {
+      position: absolute;
+      width: 12px;
+      height: 20px;
+      background-color: #444;
+      border-radius: 3px;
+      z-index: 11;
+      transition: left 2s linear;
+      transform: rotate(45deg);
+    }
+
+    .flashlight-anim:after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 8px;
+      height: 8px;
+      background-color: #F9FD76;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 5px rgba(249, 253, 118, 0.8);
+    }
+    
+    .bridge-step {
+      width: 8%;
+      height: 65%;
+      background-color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      align-self: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .bridge-steps {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5%;
+    }
   </style>
 </head>
 <body>
   
-<h1>🚶‍♂️ חציית הגשר בלילה</h1>
-<div style="color:#FFFFFF; font-size:1.25em; line-height:1.7; max-width:800px; margin:0 auto 25px; text-align:right;">
-  <strong style="color:#F9FD76;">חוקי המשחק:</strong><br>
-  - מותר עד <strong>שני אנשים</strong> על הגשר בכל פעם<br>
+<h1>חציית הגשר בלילה</h1>
+<div style="color:#FFFFFF; font-size:1.3em; line-height:1.7; max-width:800px; margin:0 auto 25px; text-align:right;">
+  <strong style="color:#FFFFFF; font-size: 1.4em;">חוקי המשחק:</strong><br>
+  - מותר עד <strong style="color:#FF7CDC;">שני אנשים</strong> על הגשר בכל פעם<br>
   - חייבים לשאת <strong style="color:#F9FD76;">פנס</strong> בכל חצייה<br>
-  - הזמן נמדד לפי <strong>האיטי מביניהם</strong><br><br>
-  עליך להעביר את ארבעת האנשים לצד השני של הגשר <strong style="color:#F9FD76;">בזמן הקצר ביותר האפשרי</strong>.<br>
-  הגשר יכול להכיל עד <strong>2 אנשים</strong> בו זמנית. יש <strong>פנס אחד בלבד</strong> – והוא חייב להיות עם החוצים.<br>
-  כאשר שני אנשים חוצים יחד – הזמן נקבע לפי <strong>האיטי מביניהם</strong>.<br>
-  <span style="color:#FFFFFF;"><strong>יעל:</strong> 8 דקות | <strong>דן:</strong> 3 דקות | <strong>מאיה:</strong> 12 דקות | <strong>רון:</strong> 5 דקות</span>
+  - הזמן נמדד לפי <strong style="color:#FF7CDC;">האיטי מביניהם</strong><br><br>
+  <span style="color:#FFFFFF;"><strong>יעל:</strong> 8 דקות | <strong>דן:</strong> 3 דקות | <strong>מאיה:</strong> 12 דקות | <strong>רון:</strong> 5 דקות</span><br><br>
+  <span>עליך להעביר את ארבעת האנשים לצד השני של הגשר <strong style="color:#99EDC3;">בזמן הקצר ביותר והאפשרי</strong>.</span>
 </div>
-
-
-  <div class="instructions">
-    עליך להעביר את ארבעת האנשים לצד השני של הגשר <strong>בזמן הקצר ביותר האפשרי</strong>.<br>
-    הגשר יכול להכיל עד 2 אנשים בו זמנית. יש פנס אחד בלבד – והוא חייב להיות עם החוצים.<br>
-    כאשר שני אנשים חוצים יחד – הזמן נקבע לפי האדם האיטי יותר.
-    <p><strong>יעל:</strong> 8 דקות | <strong>דן:</strong> 3 דקות | <strong>מאיה:</strong> 12 דקות | <strong>רון:</strong> 5 דקות</p>
-  </div>
 
   <div class="bridge-container">
     <div class="side" id="start-side"></div>
     <div class="bridge">
       <div class="flashlight" id="flashlight" style="left: 5%;"></div>
+      <div class="bridge-steps">
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+        <div class="bridge-step"></div>
+      </div>
     </div>
     <div class="side" id="end-side"></div>
   </div>
@@ -181,7 +371,7 @@
   <button id="move-btn" onclick="move()">העבר</button>
   <button id="start-btn" onclick="resetGame()">התחל</button>
 
-  <p>⏱️ זמן שחלף: <span id="time">0</span> דקות</p>
+  <p style="font-size: 1.3em;">⏱️ זמן שחלף: <span id="time">0</span> דקות</p>
   <div id="win"></div>
 
   <div id="history">
@@ -190,8 +380,60 @@
   </div>
 
   <script>
+    // יצירת צליל באמצעות Web Audio API
+    let audioContext;
+    let hasUserInteracted = false;
+    
+    // פונקציה ליצירת צליל הצלחה
+    function createSuccessSound() {
+      try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (e) {
+        console.log('Web Audio API אינו נתמך בדפדפן זה.');
+        return;
+      }
+    }
+    
+    // פונקציה להשמעת צליל הצלחה
+    function playSuccessSound() {
+      if (!audioContext) {
+        createSuccessSound();
+      }
+      
+      if (!audioContext) return;
+      
+      try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // נגן נוטה לה גבוה (A5)
+        oscillator.frequency.exponentialRampToValueAtTime(1760, audioContext.currentTime + 0.2); // עלה לנוטה לה גבוה יותר (A6)
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.5);
+      } catch (e) {
+        console.log('שגיאה בנגינת הצליל:', e);
+      }
+    }
+    
+    // רישום האזנה לאינטראקציה עם העמוד
+    document.addEventListener('click', function() {
+      if (!hasUserInteracted) {
+        hasUserInteracted = true;
+        createSuccessSound();
+      }
+    }, { once: true });
+    
     const speeds = { "יעל": 8, "דן": 3, "מאיה": 12, "רון": 5 };
     let startSide, endSide, flashlight, selected, time, moves;
+    let isAnimating = false;
 
     const updateUI = () => {
       const startEl = document.getElementById("start-side");
@@ -207,18 +449,51 @@
 
       flashlightEl.style.left = flashlight === "start" ? "5%" : "75%";
 
+      // צור אייקונים לכל אדם
+      const personIcons = {
+        "יעל": "👩‍🦰",
+        "דן": "👨‍🦱",
+        "מאיה": "👩‍🦳",
+        "רון": "👨‍🦲"
+      };
+      
+      const personClasses = {
+        "יעל": "yael",
+        "דן": "dan",
+        "מאיה": "maya",
+        "רון": "ron"
+      };
+
       startSide.forEach(p => {
         const div = document.createElement("div");
-        div.textContent = `${p} (${speeds[p]} דקות)`;
         div.className = "person" + (selected.includes(p) ? " selected" : "");
+        
+        const iconDiv = document.createElement("div");
+        iconDiv.className = `person-icon ${personClasses[p]}`;
+        iconDiv.textContent = personIcons[p];
+        div.appendChild(iconDiv);
+        
+        const textSpan = document.createElement("span");
+        textSpan.textContent = `${p} (${speeds[p]} דקות)`;
+        div.appendChild(textSpan);
+        
         div.onclick = () => toggleSelect(p, "start");
         startEl.appendChild(div);
       });
 
       endSide.forEach(p => {
         const div = document.createElement("div");
-        div.textContent = `${p} (${speeds[p]} דקות)`;
         div.className = "person" + (selected.includes(p) ? " selected" : "");
+        
+        const iconDiv = document.createElement("div");
+        iconDiv.className = `person-icon ${personClasses[p]}`;
+        iconDiv.textContent = personIcons[p];
+        div.appendChild(iconDiv);
+        
+        const textSpan = document.createElement("span");
+        textSpan.textContent = `${p} (${speeds[p]} דקות)`;
+        div.appendChild(textSpan);
+        
         div.onclick = () => toggleSelect(p, "end");
         endEl.appendChild(div);
       });
@@ -230,6 +505,11 @@
       });
 
       if (endSide.length === 4 && flashlight === "end") {
+        // הפעלת צליל ההצלחה
+        if (hasUserInteracted) {
+          setTimeout(playSuccessSound, 300);
+        }
+        
         document.getElementById("win").innerHTML = 
           time === 30 
           ? "🎉 כל הכבוד! הגעת לפתרון האופטימלי של 30 דקות!"
@@ -238,6 +518,7 @@
     };
 
     const toggleSelect = (person, side) => {
+      if (isAnimating) return;
       if ((flashlight === "start" && side !== "start") || (flashlight === "end" && side !== "end")) return;
       if (selected.includes(person)) {
         selected = selected.filter(p => p !== person);
@@ -247,26 +528,118 @@
       updateUI();
     };
 
-    const move = () => {
-      if (selected.length === 0) return;
-      const duration = Math.max(...selected.map(p => speeds[p]));
-      time += duration;
-      const direction = flashlight === "start" ? "end" : "start";
-      if (flashlight === "start") {
-        startSide = startSide.filter(p => !selected.includes(p));
-        endSide.push(...selected);
-        flashlight = "end";
-      } else {
-        endSide = endSide.filter(p => !selected.includes(p));
-        startSide.push(...selected);
-        flashlight = "start";
+    const animatePeople = (people, direction) => {
+      isAnimating = true;
+      document.getElementById("move-btn").disabled = true;
+      const bridgeEl = document.querySelector(".bridge");
+      const flashlightEl = document.getElementById("flashlight");
+      flashlightEl.style.display = "none";
+      
+      // מיקומים התחלתיים וסופיים
+      const startX = direction === "end" ? "10%" : "80%";
+      const endX = direction === "end" ? "80%" : "10%";
+      const flashlightStartX = direction === "end" ? "15%" : "75%";
+      const flashlightEndX = direction === "end" ? "75%" : "15%";
+      
+      // צור דמויות עם אייקונים
+      const personIcons = {
+        "יעל": "👩‍🦰",
+        "דן": "👨‍🦱",
+        "מאיה": "👩‍🦳",
+        "רון": "👨‍🦲"
+      };
+      
+      // יצירת האנשים
+      people.forEach((person, index) => {
+        const personEl = document.createElement("div");
+        personEl.className = `person-bridge ${index === 1 ? 'person2' : ''}`;
+        personEl.style.left = startX;
+        
+        const head = document.createElement("div");
+        head.className = "head";
+        head.textContent = personIcons[person];
+        personEl.appendChild(head);
+        
+        const body = document.createElement("div");
+        body.className = "body";
+        personEl.appendChild(body);
+        
+        const legs = document.createElement("div");
+        legs.className = "legs";
+        
+        const legLeft = document.createElement("div");
+        legLeft.className = "leg-left";
+        legs.appendChild(legLeft);
+        
+        const legRight = document.createElement("div");
+        legRight.className = "leg-right";
+        legs.appendChild(legRight);
+        
+        personEl.appendChild(legs);
+        
+        // הוספת מרווח בין האנשים
+        if (index === 1) {
+          personEl.style.left = direction === "end" ? "25%" : "65%";
+        }
+        
+        bridgeEl.appendChild(personEl);
+        
+        // אנימציה - אחרי רגע קצר
+        setTimeout(() => {
+          personEl.style.left = endX;
+        }, 100);
+      });
+      
+      // יצירת הפנס
+      if (people.length > 0) {
+        const flashlightAnimEl = document.createElement("div");
+        flashlightAnimEl.className = "flashlight-anim";
+        flashlightAnimEl.style.left = flashlightStartX;
+        flashlightAnimEl.style.bottom = "60px";
+        bridgeEl.appendChild(flashlightAnimEl);
+        
+        // אנימציה של הפנס
+        setTimeout(() => {
+          flashlightAnimEl.style.left = flashlightEndX;
+        }, 100);
       }
-      moves.push({ people: [...selected], direction, time: duration });
-      selected = [];
-      updateUI();
+      
+      // סיום האנימציה והמשך המשחק
+      setTimeout(() => {
+        // הסרת האנימציה
+        const animElements = document.querySelectorAll(".person-bridge, .flashlight-anim");
+        animElements.forEach(el => el.remove());
+        
+        // עדכון המשחק
+        const duration = Math.max(...people.map(p => speeds[p]));
+        time += duration;
+        if (direction === "end") {
+          startSide = startSide.filter(p => !people.includes(p));
+          endSide.push(...people);
+          flashlight = "end";
+        } else {
+          endSide = endSide.filter(p => !people.includes(p));
+          startSide.push(...people);
+          flashlight = "start";
+        }
+        
+        moves.push({ people: [...people], direction, time: duration });
+        selected = [];
+        updateUI();
+        isAnimating = false;
+        document.getElementById("move-btn").disabled = false;
+        flashlightEl.style.display = "block";
+      }, 2500);
+    };
+
+    const move = () => {
+      if (selected.length === 0 || isAnimating) return;
+      const direction = flashlight === "start" ? "end" : "start";
+      animatePeople([...selected], direction);
     };
 
     const resetGame = () => {
+      if (isAnimating) return;
       startSide = ["יעל", "דן", "מאיה", "רון"];
       endSide = [];
       flashlight = "start";
@@ -274,6 +647,11 @@
       time = 0;
       moves = [];
       updateUI();
+      
+      // ניקוי אנימציות
+      const animElements = document.querySelectorAll(".person-bridge, .flashlight-anim");
+      animElements.forEach(el => el.remove());
+      document.getElementById("flashlight").style.display = "block";
     };
 
     resetGame();
